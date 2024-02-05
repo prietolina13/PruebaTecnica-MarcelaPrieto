@@ -1,0 +1,429 @@
+﻿<Window x:Class="PruebaTecnica_MarcelaPrieto.View.NewFlightView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PruebaTecnica_MarcelaPrieto.View"
+        xmlns:viewModel="clr-namespace:PruebaTecnica_MarcelaPrieto.ViewModel"
+        mc:Ignorable="d"
+        Title="NewFlightView" Height="450" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Allow_Window_Movement"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Border CornerRadius="35">
+        <Border.Background>
+            <ImageBrush ImageSource="/PruebaTecnica-MarcelaPrieto;component/Assets/background.jpg"/>
+        </Border.Background>
+
+        <Border CornerRadius="30"
+            Background="#FFFFFF"
+            Opacity="0.95">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="50"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="/View/menus.png"
+                       HorizontalAlignment="Left"
+                       Width="30"
+                       Margin="15,0,0,0"/>
+
+                    <Image Source="/PruebaTecnica-MarcelaPrieto;component/Assets/OsiguLogo.png"
+                       HorizontalAlignment="Left"
+                       Margin="50,0,0,0"/>
+
+                    <Button x:Name="btnMinimize"                                               
+                        BorderThickness="0"
+                        Content="-"                        
+                        Foreground="White"
+                        FontSize="16"
+                        FontFamily="Ubuntu"
+                        Cursor="Hand"
+                        Grid.Column="1"
+                        Click="Minimize_Window">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#528EF7"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3EBEFA"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                    CornerRadius="3"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="btnClose"                                               
+                        BorderThickness="0"
+                        Content="x"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Ubuntu"
+                        Cursor="Hand"
+                        Grid.Column="2"
+                        Click="Close_Window">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#F46D72"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F4ACA4"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                    CornerRadius="3"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <TextBlock Text="Programar nuevo vuelo"
+                           Grid.Row="1"
+                           Foreground="#101E3E"
+                           FontSize="25"
+                           FontWeight="Bold"
+                           FontFamily="Lucida Sans Unicode"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding Message}"
+                           Foreground="#528EF7"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           FontFamily="Ubuntu"                             
+                           Margin="80,45,0,0"
+                           TextWrapping="Wrap"/>
+
+                </Grid>
+
+                <StackPanel Width="280"
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        Margin="100,15,0,0"
+                        HorizontalAlignment="Left">
+
+                    <TextBlock Text="Ciudad de rigen"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <ComboBox x:Name="texCityO"
+                                 ItemsSource="{Binding City}"
+                                 DisplayMemberPath="CityName"
+                                 SelectedItem="{Binding SelectedCity,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 BorderBrush="White"
+                                 Height="18"
+                                 Width="260"                                  
+                                 VerticalContentAlignment="Center">
+
+                        </ComboBox>
+                    </Border>
+
+                    <TextBlock Text="Ciudad de destino"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <ComboBox x:Name="txtCityD"
+                                  ItemsSource="{Binding City}"
+                                  DisplayMemberPath="CityName"
+                                  SelectedItem="{Binding SelectedCityDestinarion,UpdateSourceTrigger=PropertyChanged}"
+                                  FontSize="13"
+                                  FontWeight="Medium"
+                                  FontFamily="Montserrat"                            
+                                  Foreground="#7A7A7A"
+                                  BorderBrush="White"
+                                  Height="18"
+                                  Width="260"                                  
+                                  VerticalContentAlignment="Center">
+                        </ComboBox>
+                    </Border>
+
+                    <TextBlock Text="Hora de salida (yyy/mm/dd hh:mm)"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <TextBox x:Name="txtTymeD"
+                                 Text="{Binding TimeDeparture,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="White"
+                                 Height="18"
+                                 Width="260"
+                                 VerticalContentAlignment="Center">
+                        </TextBox>
+                    </Border>
+                    <TextBlock Text="Hora de llegada (yyy/mm/dd hh:mm)"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <TextBox x:Name="txtTymeA"
+                                 Text="{Binding TimeArrival,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="White"
+                                 Height="18"
+                                 Width="260"
+                                 VerticalContentAlignment="Center">
+                        </TextBox>
+                    </Border>
+
+                </StackPanel>
+                <StackPanel Width="250"
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        Margin="0,15,150,0"
+                        HorizontalAlignment="Right">
+
+                    <TextBlock Text="Número de vuelo"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <TextBox x:Name="txtNumberFlight"
+                                 Text="{Binding FlightNumber,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="White"
+                                 Height="18"
+                                 Width="239"
+                                 VerticalContentAlignment="Center">
+
+                        </TextBox>
+                    </Border>
+
+                    <TextBlock Text="Aerolínea"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <ComboBox x:Name="txtAirline"
+                                  ItemsSource="{Binding Airline}"
+                                  DisplayMemberPath="AirlineName"
+                                  SelectedItem="{Binding SelectedAirline,UpdateSourceTrigger=PropertyChanged}"
+                                 Text=""
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 BorderBrush="White"
+                                 Background="Transparent"
+                                 Height="18"
+                                 Width="239"
+                                 VerticalContentAlignment="Center">
+
+                        </ComboBox>
+                    </Border>
+
+                    <TextBlock Text="Estado del Vuelo"
+                           Foreground="#101E3E"
+                           FontSize="13"
+                           FontWeight="Regular"
+                           FontFamily="Lucida Sans"
+                           Margin="0,10,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                        BorderThickness="1" 
+                        CornerRadius="10"
+                        Margin="0,5,0,0"
+                        Height="20">
+
+                        <ComboBox x:Name="txtState"
+                                  ItemsSource="{Binding FlightStatus}"
+                                  DisplayMemberPath="StateName"
+                                  SelectedItem="{Binding SelectedFlightStatus,UpdateSourceTrigger=PropertyChanged}"
+                                 Text=""
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 BorderBrush="White"
+                                 Background="Transparent"
+                                 Height="18"
+                                 Width="239"
+                                 VerticalContentAlignment="Center">
+                        </ComboBox>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Row="3">
+
+                    <Button x:Name="btnGetNew"
+                            Command="{Binding ScheduleFlight}"
+                            BorderThickness="0"
+                            Content="Guardar"                        
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Ubuntu"
+                            Cursor="Hand"
+                            Margin="0,0,200,60"
+                            Grid.Column="2"
+                            HorizontalAlignment="Right">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#528EF7"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3EBEFA"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                    CornerRadius="10"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="btnCloseWindow"  
+                            BorderThickness="0"
+                            Click="CloseWindowCancel"
+                            Content="Cancelar"                        
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Ubuntu"
+                            Cursor="Hand"
+                            Margin="150,0,0,60"
+                            HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#F46D72"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F4ACA4"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Border>
+</Window>

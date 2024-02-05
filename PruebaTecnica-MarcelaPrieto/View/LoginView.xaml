@@ -1,0 +1,237 @@
+﻿<Window x:Class="PruebaTecnica_MarcelaPrieto.View.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PruebaTecnica_MarcelaPrieto.View"
+        xmlns:viewModel="clr-namespace:PruebaTecnica_MarcelaPrieto.ViewModel" 
+        xmlns:customcontrol="clr-namespace:PruebaTecnica_MarcelaPrieto.CustomControl"
+        mc:Ignorable="d"
+        Title="LoginView" Height="600" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Allow_Window_Movement"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <!--Se establecen los enlaces entre View y ViewModel-->
+    <Window.DataContext>
+        <viewModel:LoginViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Visibility"/>
+    </Window.Resources>
+
+    <Window.Visibility>
+        <Binding Path="Success" Mode="TwoWay" Converter="{StaticResource Visibility}"/>
+    </Window.Visibility>
+    
+    
+    
+    <Border CornerRadius="35">
+
+        <Border.Background>
+            <ImageBrush ImageSource="/PruebaTecnica-MarcelaPrieto;component/Assets/background.jpg"/>
+        </Border.Background>
+        
+        <Border CornerRadius="30"
+                Background="#FFFFFF"
+                Opacity="0.90">            
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+
+                        <Image Source="/PruebaTecnica-MarcelaPrieto;component/Assets/OsiguLogo.png"
+                           HorizontalAlignment="Left"
+                           Margin="10,0,0,0"/>                
+
+                    <Button x:Name="btnMinimize"                                               
+                            BorderThickness="0"
+                            Content="-"                        
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Ubuntu"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="Minimize_Window">
+                    
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#528EF7"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3EBEFA"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="3"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="btnClose"                                               
+                            BorderThickness="0"
+                            Content="x"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Ubuntu"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="Close_Window">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#F46D72"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#F4ACA4"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="3"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>                
+                </Grid>
+                <StackPanel Width="250"
+                            Grid.Row="2"
+                            Orientation="Vertical"
+                            Margin="0,70,0,0">
+
+                    <TextBlock Text="Aero Planner"
+                               Foreground="#101E3E"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               FontFamily="Lucida Sans Unicode"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Nombre de usuario"
+                               Foreground="#101E3E"
+                               FontSize="15"
+                               FontWeight="Regular"
+                               FontFamily="Lucida Sans"
+                               Margin="0,35,0,0"/>
+                
+                    <Border BorderBrush="DarkGray" 
+                            BorderThickness="1" 
+                            CornerRadius="10"
+                            Margin="0,5,0,0"
+                            Height="40">
+
+                        <TextBox x:Name="textUserName"
+                                 Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"                            
+                                 Foreground="#7A7A7A"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="White"
+                                 Height="26"
+                                 Padding="39,0,0,0"
+                                 VerticalContentAlignment="Center">
+
+                            <TextBox.Background>
+                                    <ImageBrush ImageSource="/PruebaTecnica-MarcelaPrieto;component/Assets/userName.png"
+                                            Stretch="None"
+                                            AlignmentX="Left"/>
+                            </TextBox.Background>
+                        
+                        </TextBox>
+                    </Border>
+
+                    <TextBlock Text="Contraseña"
+                               Foreground="#101E3E"
+                               FontSize="15"
+                               FontWeight="Regular"
+                               FontFamily="Lucida Sans"
+                               Margin="0,20,0,0"/>
+
+                    <Border BorderBrush="DarkGray" 
+                            BorderThickness="1" 
+                            CornerRadius="10"
+                            Margin="0,5,0,0"
+                            Height="40">
+
+                            <customcontrol:PasswordInput  Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Height="26">
+                        
+                        </customcontrol:PasswordInput>                    
+                    </Border>
+
+                        <TextBlock Text="{Binding ErrorMessage}"
+                               Foreground="#F46D72"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Ubuntu"                             
+                               Margin="0,10,0,0"
+                               TextWrapping="Wrap"/>
+
+                        <Button x:Name="btnLogin"  
+                                Command="{Binding LoginCommand}"
+                                BorderThickness="0"
+                                Content="Iniciar sesión"                        
+                                Foreground="White"
+                                FontSize="16"
+                                FontFamily="Ubuntu"
+                                Cursor="Hand"
+                                Margin="0,50,0,0"
+                                Grid.Column="2">
+
+                            <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#528EF7"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3EBEFA"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">      
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
